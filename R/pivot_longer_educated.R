@@ -1,12 +1,3 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param educated_2014_raw
-#' @return
-#' @author njtierney
-#' @export
 pivot_longer_educated <- function(educated_raw) {
 
   pivot_longer(

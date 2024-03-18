@@ -1,12 +1,3 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param raw_data_2014
-#' @return
-#' @author njtierney
-#' @export
 prepare_education <- function(raw_data_2014) {
 
   # clean up the silly names from excel

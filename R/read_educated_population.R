@@ -1,12 +1,3 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param year
-#' @return
-#' @author njtierney
-#' @export
 read_educated_population <- function(year = "2014") {
 
   raw_data <- read_raw_education_data(year = year)
