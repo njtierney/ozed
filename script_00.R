@@ -1,23 +1,29 @@
+# load packages for data analysis
 library(tidyverse)
 library(readxl)
 library(naniar)
 library(visdat)
 library(janitor)
 
+# Read in the raw data
 raw_data <- read_excel(
   path = "data/Education and work, 2023, Datacube 2 (Table 11).xlsx",
   sheet = "2014", 
   skip = 4, 
   n_max = 32,
+  # use janitor::make_clean_names to turn `15-19-years` to "x15_19_years"
   .name_repair = make_clean_names
 )
 
 # clean up the silly names from excel
+# 
+names(raw_data)
 new_data_names_raw <- names(raw_data)
 new_data_names_raw[1] <- "state_territory"
 new_data_names <- new_data_names_raw
 
 # subset the data down to the number of educated people section
+raw_data
 educated_2014_raw <- raw_data %>% 
   slice(4:11) %>% 
   set_names(new_data_names)
