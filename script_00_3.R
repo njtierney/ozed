@@ -1,4 +1,3 @@
-# load packages for data analysis
 library(tidyverse)
 library(here)
 library(readxl)
@@ -6,27 +5,20 @@ library(naniar)
 library(visdat)
 library(janitor)
 
-# Read in the raw data
-raw_data <- read_excel(
-  path = "data/Education and work, 2023, Datacube 2 (Table 11).xlsx",
-  sheet = "2014", 
-  skip = 4, 
-  n_max = 32,
-  # use janitor::make_clean_names to turn `15-19-years` to "x15_19_years"
-  .name_repair = make_clean_names
-)
+source("R/read_raw_education_data.R")
+raw_data_2014 <- read_raw_education_data(year = "2014")
 
+source("R/extract_education_col_names.R")
 # clean up the silly names from excel
-names(raw_data)
-new_data_names_raw <- names(raw_data)
-new_data_names_raw[1] <- "state_territory"
-new_data_names <- new_data_names_raw
+new_names <- extract_education_col_names(raw_data_2014)
 
+source("R/extract_rows_set_names.R")
 # subset the data down to the number of educated people section
-raw_data
-educated_2014_raw <- raw_data %>% 
-  slice(4:11) %>% 
-  set_names(new_data_names)
+educated_2014_raw <- extract_rows_set_names(
+  raw_data_2014, 
+  row_numbers = 4:11,
+  names = new_names
+)
 
 educated_2014 <- educated_2014_raw %>% 
   pivot_longer(
@@ -43,11 +35,11 @@ educated_2014 <- educated_2014_raw %>%
   ) %>% 
   # remove larger 15_24/64/74 age bands
   filter(
-      age_group != "15_24",
-      age_group != "15_64",
-      age_group != "15_74",
-      age_group != "18_24",
-      age_group != "25_64"
+    age_group != "15_24",
+    age_group != "15_64",
+    age_group != "15_74",
+    age_group != "18_24",
+    age_group != "25_64"
   )
 
 # Population in age groups
