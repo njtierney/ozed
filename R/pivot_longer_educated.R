@@ -1,4 +1,4 @@
-pivot_longer_educated <- function(educated_raw) {
+pivot_longer_educated <- function(educated_raw_2014) {
 
   pivot_longer(
     data = educated_raw,

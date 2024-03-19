@@ -1,5 +1,5 @@
-combine_educated_population <- function(education = educated_2014, 
-                                        population = population_2014, 
+combine_educated_population <- function(educated_2014, 
+                                        population_2014, 
                                         year = 2014) {
   education %>%
     left_join(population,
