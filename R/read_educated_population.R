@@ -1,5 +1,5 @@
 read_educated_population <- function(year = "2014") {
-
+  
   raw_data <- read_raw_education_data(year = year)
   
   educated <- prepare_education(raw_data)

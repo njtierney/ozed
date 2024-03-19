@@ -28,6 +28,7 @@ educated_2014_raw <- raw_data %>%
   slice(4:11) %>% 
   set_names(new_data_names)
 
+educated_2014_raw
 educated_2014 <- educated_2014_raw %>% 
   pivot_longer(
     cols = -state_territory,
