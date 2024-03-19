@@ -41,7 +41,7 @@ educated_2014 <- educated_2014_raw %>%
   arrange(
     state_territory,
     age_group
-  ) %>% 
+  )
   # remove larger 15_24/64/74 age bands
   filter(
       age_group != "15_24",
@@ -56,7 +56,7 @@ population_2014_raw <- raw_data %>%
   slice(24:31) %>% 
   set_names(new_data_names)
 
-population_2014 <- population_2014_raw %>% 
+population_2014 <- population_raw %>% 
   pivot_longer(
     cols = -state_territory,
     names_to = "age_group",
@@ -74,7 +74,7 @@ population_2014 <- population_2014_raw %>%
     age_group != "15_24",
     age_group != "15_64",
     age_group != "15_74",
-    age_group != "18_24",
+    age_group != "18_24"
     age_group != "25_64"
   )
 
@@ -99,5 +99,3 @@ ggplot(educated_population_2014,
            y = state_territory)) + 
   geom_col() + 
   facet_wrap(~age_group)
-
-
