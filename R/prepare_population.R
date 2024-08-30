@@ -1,5 +1,6 @@
 prepare_population <- function(raw_data_2014) {
 
+  new_names <- extract_education_col_names(raw_data_2014)
 
   # Population in age groups
   population_2014_raw <- extract_rows_set_names(

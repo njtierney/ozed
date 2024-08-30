@@ -8,16 +8,23 @@ educated_population <- map_dfr(.x = study_years,
 
 educated_population
 
-ggplot(educated_population_2014,
+ggplot(educated_population,
        aes(x = prop_studying,
            y = state_territory)) + 
   geom_col() + 
   facet_wrap(~age_group)
 
+educated_population |> 
+  filter(state_territory == "ACT") |> 
+  ggplot(aes(x = year,
+             y = prop_studying,
+             group = age_group)) + 
+  geom_line() 
+
 ggplot(educated_population,
        aes(x = year,
-           y = state_territory)) + 
-  geom_col() + 
+           y = prop_studying,
+           group = state_territory,
+           colour = state_territory)) + 
+  geom_line()  + 
   facet_wrap(~age_group)
-
-

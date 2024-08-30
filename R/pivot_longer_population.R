@@ -1,5 +1,4 @@
-pivot_longer_population <- function(population_2014_raw) {
-
+pivot_longer_population <- function(population_raw) {
   pivot_longer(
     data = population_raw,
     cols = -state_territory,

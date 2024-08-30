@@ -13,10 +13,10 @@ source("R/extract_education_col_names.R")
 new_names <- extract_education_col_names(raw_data_2014)
 
 # subset the data down to the number of educated people section
-raw_data
-educated_2014_raw <- raw_data %>% 
+raw_data_2014
+educated_2014_raw <- raw_data_2014 %>% 
   slice(4:11) %>% 
-  set_names(new_data_names)
+  set_names(new_names)
 
 educated_2014 <- educated_2014_raw %>% 
   pivot_longer(
@@ -41,9 +41,9 @@ educated_2014 <- educated_2014_raw %>%
   )
 
 # Population in age groups
-population_2014_raw <- raw_data %>% 
+population_2014_raw <- raw_data_2014 %>% 
   slice(24:31) %>% 
-  set_names(new_data_names)
+  set_names(new_names)
 
 population_2014 <- population_2014_raw %>% 
   pivot_longer(

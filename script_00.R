@@ -12,7 +12,7 @@ raw_data <- read_excel(
   sheet = "2014", 
   skip = 4, 
   n_max = 32,
-  # use janitor::make_clean_names to turn `15-19-years` to "x15_19_years"
+  # use janitor::make_clean_names to turn `15-19 years` to "x15_19_years"
   .name_repair = make_clean_names
 )
 
@@ -41,7 +41,7 @@ educated_2014 <- educated_2014_raw %>%
   arrange(
     state_territory,
     age_group
-  )
+  ) %>%
   # remove larger 15_24/64/74 age bands
   filter(
       age_group != "15_24",
@@ -51,12 +51,13 @@ educated_2014 <- educated_2014_raw %>%
       age_group != "25_64"
   )
 
+educated_2014
 # Population in age groups
 population_2014_raw <- raw_data %>% 
   slice(24:31) %>% 
   set_names(new_data_names)
 
-population_2014 <- population_raw %>% 
+population_2014 <- population_2014_raw %>% 
   pivot_longer(
     cols = -state_territory,
     names_to = "age_group",
@@ -74,7 +75,7 @@ population_2014 <- population_raw %>%
     age_group != "15_24",
     age_group != "15_64",
     age_group != "15_74",
-    age_group != "18_24"
+    age_group != "18_24",
     age_group != "25_64"
   )
 

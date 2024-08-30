@@ -4,7 +4,7 @@ extract_rows_set_names <- function(raw_data,
 
   educated_raw <- raw_data %>% 
     slice(row_numbers) %>% 
-    set_names(new_data_names)
+    set_names(names)
   
 
 }
