@@ -30,8 +30,8 @@ dirty_up_data <- function(
         "_",
         sample(x = age_sep, size = n(), replace = TRUE)
       ),
-      n_studying = set_prop_miss(n_studying, 0.1),
-      n_studying = replace_na_with(n_studying, missing_rep)
+      prop_studying = set_prop_miss(prop_studying, 0.1),
+      prop_studying = replace_na_with(prop_studying, missing_rep)
     )
 }
 
@@ -58,7 +58,7 @@ education_2019 <- read_csv("data/tidy/education_2019.csv") |>
 # write the data out
 
 write_raw_education <- function(data, year) {
-  csv_path <- file.path("data", "messy", paste0("raw_education_", year, ".csv"))
+  csv_path <- file.path("data", "raw", paste0("raw_education_", year, ".csv"))
   write_csv(data, csv_path)
 }
 
