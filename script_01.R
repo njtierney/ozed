@@ -24,10 +24,6 @@ educated_population_2014 <- combine_educated_population(
 
 educated_population_2014
 
-ggplot(educated_population_2014,
-       aes(x = prop_studying,
-           y = state_territory)) + 
-  geom_col() + 
+ggplot(educated_population_2014, aes(x = prop_studying, y = state_territory)) +
+  geom_col() +
   facet_wrap(~age_group)
-
-

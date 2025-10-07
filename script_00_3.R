@@ -15,12 +15,12 @@ new_names <- extract_education_col_names(raw_data_2014)
 source("R/extract_rows_set_names.R")
 # subset the data down to the number of educated people section
 educated_2014_raw <- extract_rows_set_names(
-  raw_data_2014, 
+  raw_data_2014,
   row_numbers = 4:11,
   names = new_names
 )
 
-educated_2014 <- educated_2014_raw %>% 
+educated_2014 <- educated_2014_raw %>%
   pivot_longer(
     cols = -state_territory,
     names_to = "age_group",
@@ -28,11 +28,11 @@ educated_2014 <- educated_2014_raw %>%
     names_pattern = "(.*)_years",
     values_to = "n_studying",
     values_transform = as.numeric
-  ) %>% 
+  ) %>%
   arrange(
     state_territory,
     age_group
-  ) %>% 
+  ) %>%
   # remove larger 15_24/64/74 age bands
   filter(
     age_group != "15_24",
@@ -43,11 +43,11 @@ educated_2014 <- educated_2014_raw %>%
   )
 
 # Population in age groups
-population_2014_raw <- raw_data %>% 
-  slice(24:31) %>% 
+population_2014_raw <- raw_data %>%
+  slice(24:31) %>%
   set_names(new_data_names)
 
-population_2014 <- population_2014_raw %>% 
+population_2014 <- population_2014_raw %>%
   pivot_longer(
     cols = -state_territory,
     names_to = "age_group",
@@ -55,11 +55,11 @@ population_2014 <- population_2014_raw %>%
     names_pattern = "(.*)_years",
     values_to = "population",
     values_transform = as.numeric
-  ) %>% 
+  ) %>%
   arrange(
     state_territory,
     age_group
-  ) %>% 
+  ) %>%
   # remove larger 15_24/64/74 age bands
   filter(
     age_group != "15_24",
@@ -71,24 +71,19 @@ population_2014 <- population_2014_raw %>%
 
 # combine the data
 # I guess it's only a study rather than the true numbers?
-educated_population_2014 <- educated_2014 %>% 
-  left_join(population_2014,
-            by = c("state_territory", "age_group")) %>% 
+educated_population_2014 <- educated_2014 %>%
+  left_join(population_2014, by = c("state_territory", "age_group")) %>%
   mutate(
     age_group = as_factor(age_group),
-    prop_studying = n_studying/population,
+    prop_studying = n_studying / population,
     year = 2014
-  ) %>% 
+  ) %>%
   relocate(
     year
   )
 
 educated_population_2014
 
-ggplot(educated_population_2014,
-       aes(x = prop_studying,
-           y = state_territory)) + 
-  geom_col() + 
+ggplot(educated_population_2014, aes(x = prop_studying, y = state_territory)) +
+  geom_col() +
   facet_wrap(~age_group)
-
-

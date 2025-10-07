@@ -15,7 +15,7 @@ new_names <- extract_education_col_names(raw_data_2014)
 source("R/extract_rows_set_names.R")
 # subset the data down to the number of educated people section
 educated_2014_raw <- extract_rows_set_names(
-  raw_data_2014, 
+  raw_data_2014,
   row_numbers = 4:11,
   names = new_names
 )
@@ -25,7 +25,7 @@ educated_2014 <- pivot_longer_educated(educated_2014_raw)
 
 # Population in age groups
 population_2014_raw <- extract_rows_set_names(
-  raw_data_2014, 
+  raw_data_2014,
   row_numbers = 24:31,
   names = new_names
 )
@@ -43,10 +43,6 @@ educated_population_2014 <- combine_educated_population(
 
 educated_population_2014
 
-ggplot(educated_population_2014,
-       aes(x = prop_studying,
-           y = state_territory)) + 
-  geom_col() + 
+ggplot(educated_population_2014, aes(x = prop_studying, y = state_territory)) +
+  geom_col() +
   facet_wrap(~age_group)
-
-
